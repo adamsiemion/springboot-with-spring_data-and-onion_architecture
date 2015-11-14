@@ -9,7 +9,12 @@ import javax.inject.Inject;
 @Component
 public class UserRepositorySpringData implements UserRepository {
 
-    @Inject private UserRepositorySpringDataJpa repository;
+    private final UserRepositorySpringDataJpa repository;
+
+    @Inject
+    public UserRepositorySpringData(final UserRepositorySpringDataJpa repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Iterable<User> findAll() {

@@ -16,11 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserRest {
-    @Inject
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Inject
-    private UserService userService;
+    public UserRest(final UserRepository userRepository, final UserService userService) {
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> list() {

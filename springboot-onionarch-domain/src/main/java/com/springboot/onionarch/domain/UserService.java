@@ -7,7 +7,12 @@ import javax.inject.Inject;
 @Component
 public class UserService {
 
-    @Inject private UserRepository repository;
+    private final UserRepository repository;
+
+    @Inject
+    public UserService(final UserRepository repository) {
+        this.repository = repository;
+    }
 
     public void uppercaseAllUserNames() {
         Iterable<User> users = repository.findAll();
