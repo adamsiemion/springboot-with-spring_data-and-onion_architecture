@@ -1,4 +1,4 @@
-package com.springboot.onionarch;
+package com.springboot.onionarch.domain;
 
 import org.springframework.stereotype.Component;
 

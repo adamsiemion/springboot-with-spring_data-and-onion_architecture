@@ -1,4 +1,4 @@
-package com.springboot.onionarch;
+package com.springboot.onionarch.domain;
 
 public interface UserRepository {
     Iterable<User> findAll();

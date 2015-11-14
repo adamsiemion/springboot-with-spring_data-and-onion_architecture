@@ -1,6 +1,9 @@
-package com.springboot.onionarch;
+package com.springboot.onionarch.rest;
 
 
+import com.springboot.onionarch.domain.User;
+import com.springboot.onionarch.domain.UserRepository;
+import com.springboot.onionarch.domain.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,14 +17,14 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserRest {
     @Inject
-    private UserRepository userJpaRepository;
+    private UserRepository userRepository;
 
     @Inject
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> list() {
-        Iterable<User> users = userJpaRepository.findAll();
+        Iterable<User> users = userRepository.findAll();
         List<User> ret = new ArrayList<>();
         users.forEach(ret::add);
         return ret;
@@ -29,7 +32,7 @@ public class UserRest {
 
     @RequestMapping(method = RequestMethod.POST)
     public void create(@RequestBody User user) {
-        userJpaRepository.save(user);
+        userRepository.save(user);
     }
 
     @RequestMapping(value = "upp", method = RequestMethod.PUT)

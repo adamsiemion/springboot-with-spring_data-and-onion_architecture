@@ -1,4 +1,4 @@
-package com.springboot.onionarch;
+package com.springboot.onionarch.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

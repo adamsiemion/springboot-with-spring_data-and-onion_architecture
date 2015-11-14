@@ -1,5 +1,7 @@
-package com.springboot.onionarch;
+package com.springboot.onionarch.jpa;
 
+import com.springboot.onionarch.domain.User;
+import com.springboot.onionarch.domain.UserRepository;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
