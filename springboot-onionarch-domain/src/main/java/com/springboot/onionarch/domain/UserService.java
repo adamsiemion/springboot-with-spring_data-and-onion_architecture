@@ -1,10 +1,11 @@
 package com.springboot.onionarch.domain;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
-@Component
+@Service
 public class UserService {
 
     private final UserRepository repository;

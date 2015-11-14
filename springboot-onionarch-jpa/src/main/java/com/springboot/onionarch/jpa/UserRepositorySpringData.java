@@ -3,10 +3,11 @@ package com.springboot.onionarch.jpa;
 import com.springboot.onionarch.domain.User;
 import com.springboot.onionarch.domain.UserRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 
-@Component
+@Repository
 public class UserRepositorySpringData implements UserRepository {
 
     private final UserRepositorySpringDataJpa repository;
