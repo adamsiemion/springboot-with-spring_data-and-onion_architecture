@@ -34,6 +34,7 @@
         <dependency>
             <groupId>com.adko.springboot-onionarch</groupId>
             <artifactId>springboot-onionarch-jpa</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
