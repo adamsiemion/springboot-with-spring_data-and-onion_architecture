@@ -20,7 +20,7 @@ public class User {
         return name;
     }
 
-    public User() {
+    User() {
     }
 
     public User(String name) {
