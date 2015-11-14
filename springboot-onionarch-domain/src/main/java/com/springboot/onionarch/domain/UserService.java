@@ -1,6 +1,5 @@
 package com.springboot.onionarch.domain;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -16,7 +15,7 @@ public class UserService {
     }
 
     public void uppercaseAllUserNames() {
-        Iterable<User> users = repository.findAll();
+        Iterable<User> users = repository.list();
         for(User user : users) {
             User uppercasedUser = new User(user.getId(), user.getName().toUpperCase());
             repository.save(uppercasedUser);

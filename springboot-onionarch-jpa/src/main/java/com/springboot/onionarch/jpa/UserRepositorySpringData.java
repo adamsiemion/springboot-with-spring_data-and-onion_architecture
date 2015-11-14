@@ -18,12 +18,22 @@ public class UserRepositorySpringData implements UserRepository {
     }
 
     @Override
-    public Iterable<User> findAll() {
+    public Iterable<User> list() {
         return repository.findAll();
+    }
+
+    @Override
+    public User get(Long id) {
+        return repository.findOne(id);
     }
 
     @Override
     public void save(User user) {
         repository.save(user);
+    }
+
+    @Override
+    public void delete(Long aLong) {
+        repository.delete(aLong);
     }
 }
