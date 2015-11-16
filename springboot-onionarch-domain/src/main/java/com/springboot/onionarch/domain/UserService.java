@@ -1,10 +1,9 @@
 package com.springboot.onionarch.domain;
 
-import org.springframework.stereotype.Service;
-
 import javax.inject.Inject;
+import javax.inject.Named;
 
-@Service
+@Named
 public class UserService {
 
     private final UserRepository repository;
@@ -14,11 +13,11 @@ public class UserService {
         this.repository = repository;
     }
 
-    public void uppercaseAllUserNames() {
-        Iterable<User> users = repository.list();
+    public void upperCaseAllUserNames() {
+        final Iterable<User> users = repository.list();
         for(User user : users) {
-            User uppercasedUser = new User(user.getId(), user.getName().toUpperCase());
-            repository.save(uppercasedUser);
+            User userWithUpperCasedName = new User(user.getId(), user.getName().toUpperCase());
+            repository.save(userWithUpperCasedName);
         }
     }
 }

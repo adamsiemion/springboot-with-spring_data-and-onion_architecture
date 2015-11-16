@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-@Repository
+@Named
 public class UserRepositorySpringData implements UserRepository {
 
     private final UserRepositorySpringDataJpa repository;

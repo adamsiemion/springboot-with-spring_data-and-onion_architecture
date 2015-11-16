@@ -37,7 +37,7 @@ public class UserRest {
 
     @RequestMapping(value = "upp", method = RequestMethod.PUT)
     public void uppercase() {
-        userService.uppercaseAllUserNames();
+        userService.upperCaseAllUserNames();
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
