@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>springboot-onionarch-domain</module>
-		<module>springboot-onionarch-rest</module>
-		<module>springboot-onionarch-jpa</module>
+		<module>springboot-onionarch-infrastructure-rest-springmvc</module>
+		<module>springboot-onionarch-infrastructure-data-jpa</module>
 	</modules>
 	<packaging>pom</packaging>
 
@@ -29,12 +29,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.adko.springboot-onionarch</groupId>
-				<artifactId>springboot-onionarch-jpa</artifactId>
+				<artifactId>springboot-onionarch-infrastructure-data-jpa</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.adko.springboot-onionarch</groupId>
-				<artifactId>springboot-onionarch-rest</artifactId>
+				<artifactId>springboot-onionarch-infrastructure-rest-springmvc</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
