@@ -33,7 +33,7 @@
 
         <dependency>
             <groupId>com.adko.springboot-onionarch</groupId>
-            <artifactId>springboot-onionarch-jpa</artifactId>
+            <artifactId>springboot-onionarch-jooq</artifactId>
             <scope>runtime</scope>
         </dependency>
 

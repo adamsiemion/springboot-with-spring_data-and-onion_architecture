@@ -4,6 +4,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = JpaConfig.class)
+@ComponentScan(basePackageClasses = JpaModule.class)
 public class JpaConfig {
 }

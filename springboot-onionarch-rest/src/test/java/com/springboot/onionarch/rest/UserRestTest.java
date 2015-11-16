@@ -1,8 +1,9 @@
 package com.springboot.onionarch.rest;
 
 import com.springboot.onionarch.SpringbootOnionArchitectureApplication;
+import com.springboot.onionarch.domain.DomainConfig;
 import com.springboot.onionarch.domain.User;
-import com.springboot.onionarch.rest.UserRest;
+import com.springboot.onionarch.jooq.JooqConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
