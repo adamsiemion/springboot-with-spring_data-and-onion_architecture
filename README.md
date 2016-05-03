@@ -1,16 +1,24 @@
 This tutorial will show how to create a REST application using the Onion architecture and Spring boot (Spring Core, Spring MVC and Spring Data). 
 For simplicity it will use an in-memory database (Fongo) and expose only one REST endpoint.
 
-The traditional three-layered architecture has the following consists of:
+The traditional three-layered architecture consists of:
 
 + presentation layer
 + application layer (also called business logic, logic or middle layer)
 + data layer
 
-The onion architecture is a variant of multi-layered architecture, without the drawbacks of a traditional multi-layered architecture:
+The onion architecture is a variant of multi-layered architecture, which consists of:
+
++ application core which consits of:
+ * domain model
+ * domain services
+ * application services
++ infrastructure
+
+The onion architecture does not have the drawbacks of the traditional three-layered architecture:
 
 + the domain layer does not have dependencies to any infrastructure code (expect for the javax.inject library)
-+ infrastructure code dependencies are kept in separate modules thanks to which they do not pollute other modules
++ infrastructure code dependencies are kept in separate modules thanks to which they do not pollute the dependencies of the other modules
 
 [More on Onion Architecture](http://jeffreypalermo.com/blog/the-onion-architecture-part-1)
 
