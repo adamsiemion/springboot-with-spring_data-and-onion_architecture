@@ -35,7 +35,7 @@ The complete `pom.xml` content:
      <groupId>com.github.adamsiemion.onionarch</groupId>
      <artifactId>onionarch</artifactId>
      <packaging>pom</packaging>
-     <version>1.0-SNAPSHOT</version>
+     <version>1.0.0-SNAPSHOT</version>
     
      <properties>
        <maven.compiler.source>1.8</maven.compiler.source>
@@ -74,9 +74,10 @@ to a specific infrastructure library. In order to prevent this coupling we use t
 
 From the root directory run:
 
-    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain -DinteractiveMode=false
+    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 
 We start development from the domain layer, following the principles of Domain Driven Design.
+A specific version (`1.0.0-SNAPSHOT`) was provided just to follow the most popular versioning convention - [semantic versioning](http://semver.org). 
 
 ## Delete genered `App.java` and `AppTest.java` 
 
@@ -102,7 +103,7 @@ public class User {
 From the root directory run:
 
 ```bash
-mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-rest -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-rest -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 ```
 
 ## Delete genered `App.java` and `AppTest.java` 
@@ -368,7 +369,7 @@ and do a GET to http://localhost:8080/users (`curl http://localhost:8080/users`)
 
 From the root directory run:
 
-    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data -DinteractiveMode=false
+    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 
 ## Add dependencies for Spring Boot and Spring Data
 
@@ -501,7 +502,7 @@ The above class is an example of the delegate design pattern.
 
 To build the application go to the root directory and run: `mvn install`
 
-To run the application go to the rest module directory and run: `java -jar target/onionarch-rest-1.0-SNAPSHOT.jar`
+To run the application go to the rest module directory and run: `java -jar target/onionarch-rest-1.0.0-SNAPSHOT.jar`
 
 ## Test the application
 
