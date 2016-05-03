@@ -29,33 +29,35 @@ Create directory `onionarch` with `pom.xml` with:
 
 The complete `pom.xml` content:
 
-    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-     <modelVersion>4.0.0</modelVersion>
-     <groupId>com.github.adamsiemion.onionarch</groupId>
-     <artifactId>onionarch</artifactId>
-     <packaging>pom</packaging>
-     <version>1.0.0-SNAPSHOT</version>
-    
-     <properties>
-       <maven.compiler.source>1.8</maven.compiler.source>
-       <maven.compiler.target>1.8</maven.compiler.target>
-     </properties>
-    
-     <dependencies>
-       <dependency>
-         <groupId>javax.inject</groupId>
-         <artifactId>javax.inject</artifactId>
-         <version>1</version>
-       </dependency>
-       <dependency>
-         <groupId>junit</groupId>
-         <artifactId>junit</artifactId>
-         <version>4.12</version>
-         <scope>test</scope>
-       </dependency>
-     </dependencies>
-    </project>
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.adamsiemion.onionarch</groupId>
+    <artifactId>onionarch</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
+```
 
 Multimodule maven project allows better dependencies management because each maven module can contain only the dependencies needed by the code in this specific module. 
 Whenever the domain module requires access to infrastructure code, e.g. to send an email or download a file from FTP instead of adding a dependency 
@@ -74,7 +76,9 @@ to a specific infrastructure library. In order to prevent this coupling we use t
 
 From the root directory run:
 
-    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+```bash
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+```
 
 We start development from the domain layer, following the principles of Domain Driven Design.
 A specific version (`1.0.0-SNAPSHOT`) was provided just to follow the most popular versioning convention - [semantic versioning](http://semver.org). 
@@ -116,53 +120,58 @@ rm onionarch-rest\src\main\java\com\github\adamsiemion\onionarch\App.java oniona
 
 Add below content to `onionarch-rest\pom.xml`
 
-    <dependencyManagement>
-      <dependencies>
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-dependencies</artifactId>
-          <version>1.3.3.RELEASE</version>
-          <type>pom</type>
-          <scope>import</scope>
-        </dependency>
-      </dependencies>
-    </dependencyManagement>
-    
+```xml
+<dependencyManagement>
     <dependencies>
-      <dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.3.3.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-    </dependencies>
-
+    </dependency>
+</dependencies>
+```
 
 ## Add a dependency to the domain module
 
-    <dependency>
-     <groupId>com.github.adamsiemion.onionarch</groupId>
-     <artifactId>onionarch-domain</artifactId>
-     <version>${project.version}</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.github.adamsiemion.onionarch</groupId>
+    <artifactId>onionarch-domain</artifactId>
+    <version>${project.version}</version>
+</dependency>
+```
 
 ## Add a plugin to build an executable jar
 
 Edit pom.xml from the rest module directory and add:
 
-    <build>
-     <plugins>
-       <plugin>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-maven-plugin</artifactId>
-         <executions>
-           <execution>
-             <goals>
-               <goal>repackage</goal>
-             </goals>
-           </execution>
-         </executions>
-       </plugin>
-     </plugins>
-    </build>
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
 
 ## Create a `@SpringBootApplication` class
 
@@ -369,53 +378,63 @@ and do a GET to http://localhost:8080/users (`curl http://localhost:8080/users`)
 
 From the root directory run:
 
-    mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+```bash
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+```
 
 ## Add dependencies for Spring Boot and Spring Data
 
-    <dependencyManagement>
+```xml
+<dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>1.3.3.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.3.3.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
     </dependencies>
-    </dependencyManagement>
-    
-    <dependencies>
+</dependencyManagement>
+
+<dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
-    </dependencies>
+</dependencies>
+```
 
 ## Add a dependency to the domain module
 
-    <dependency>
-      <groupId>com.github.adamsiemion.onionarch</groupId>
-      <artifactId>onionarch-domain</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.github.adamsiemion.onionarch</groupId>
+    <artifactId>onionarch-domain</artifactId>
+    <version>${project.version}</version>
+</dependency>
+```
 
 ## Add a dependency to fongo in the storage module
 
-    <dependency>
-     <groupId>com.github.fakemongo</groupId>
-     <artifactId>fongo</artifactId>
-     <version>1.6.7</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.github.fakemongo</groupId>
+    <artifactId>fongo</artifactId>
+    <version>1.6.7</version>
+</dependency>
+```
 
 ## Add a dependency to the storage module in the presentation module
 
-    <dependency>
-     <groupId>com.github.adamsiemion.onionarch</groupId>
-     <artifactId>onionarch-storage</artifactId>
-     <version>${project.version}</version>
-     <type>runtime</type>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.github.adamsiemion.onionarch</groupId>
+    <artifactId>onionarch-storage</artifactId>
+    <version>${project.version}</version>
+    <type>runtime</type>
+</dependency>
+```
 
 This is required because contrary to the traditional layered architecture the domain layer does not have a dependency to the data layer, 
 so the infrastructure has to directly provide a dependency to another infrastructure module. 
