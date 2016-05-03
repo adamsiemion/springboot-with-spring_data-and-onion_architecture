@@ -77,7 +77,8 @@ to a specific infrastructure library. In order to prevent this coupling we use t
 From the root directory run:
 
 ```bash
-mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-domain \
+-DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 ```
 
 We start development from the domain layer, following the principles of Domain Driven Design.
@@ -105,7 +106,8 @@ public class User {
 From the root directory run:
 
 ```bash
-mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-rest -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-rest \
+-DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 ```
 
 ## Delete the generated Java files
@@ -268,7 +270,7 @@ public class User {
         return "User{id='" + id + "', name='" + name + "'}";
     }
 }
-```java
+```
 
 [Lombok](https://projectlombok.org) can reduce the number of boilerplate code (such as getters, `toString()`, `equals()`, `hashCode()`).
 It is possible to [make the above class immutable what brings a lot of advantages](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html), 
@@ -373,7 +375,8 @@ and do a GET to http://localhost:8080/users (`curl http://localhost:8080/users`)
 From the root directory run:
 
 ```bash
-mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data -DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
+mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=onionarch-data \
+-DinteractiveMode=false -Dversion=1.0.0-SNAPSHOT
 ```
 
 ## Delete the generated Java files
