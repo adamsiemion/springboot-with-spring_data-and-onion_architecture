@@ -1,5 +1,4 @@
-This tutorial will show how to create a REST application using the Onion architecture and Spring boot (Spring Core, Spring MVC and Spring Data). 
-For simplicity it will use an in-memory database (Fongo) and expose only one REST endpoint.
+This tutorial will show how to create a REST application using the Onion architecture and Spring Boot (Spring Core, Spring MVC and Spring Data). For simplicity it will use an in-memory database (Fongo) and expose only one REST endpoint. Also please note that this tutorial focuses on using the Onion Architecture in practise and intentionally does not cover very important aspects of developing production applications such as [writing tests](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html), [packaging of Spring applications](http://www.kubrynski.com/2015/11/smart-package-structure-to-improve.html) or [REST API design](https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling).
 
 The traditional three-layered architecture consists of:
 
@@ -7,22 +6,17 @@ The traditional three-layered architecture consists of:
 + application layer (also called business logic, logic or middle layer)
 + data layer
 
-The onion architecture is a variant of multi-layered architecture, which consists of:
+The traditional three-layered architecture has downward dependencies - the presentation layer depends on the application layers and the application layer depends on the data layer and therefore, transitively, the presentation layer depends on the data layer. The dependencies of the downward layers are inherited by the upward layers, so if the data layer defines a dependency to a library (e.g. ORM library) this dependency will be inherited by the application (and presentation) layer. In a project where boundaries between the layers are not enforced it might lead to a situation where an ORM class (e.g. `SQLException`) is propagated to the application (and presentation) layer. This introduces an coupling between the layers - your domain (and presentation) is no longer independent of the implementation of the data layer - whenever the implementation of the data layer change (e.g. you switch from JPA to Spring Data) you have to change the domain (and presentation) layer. The Onion Architecture is designed to prevent this problem.
 
-+ application core which consits of:
+The Onion Architecture is a variant of multi-layered architecture, which consists of:
+
++ application core which consists of:
  * domain model
  * domain services
  * application services
 + infrastructure
 
-The onion architecture does not have the drawbacks of the traditional three-layered architecture:
-
-+ the domain layer does not have dependencies to any infrastructure code (expect for the javax.inject library)
-+ infrastructure code dependencies are kept in separate modules thanks to which they do not pollute the dependencies of the other modules
-
 [More on Onion Architecture](http://jeffreypalermo.com/blog/the-onion-architecture-part-1)
-
-[Complete tutorial sources](https://github.com/adko-pl/springboot-with-spring_data-and-onion_architecture)
 
 # Project setup
 
@@ -67,16 +61,12 @@ The complete `pom.xml` content:
 </project>
 ```
 
-Multimodule maven project allows better dependencies management because each maven module can contain only the dependencies needed by the code in this specific module. 
-Whenever the domain module requires access to infrastructure code, e.g. to send an email or download a file from FTP instead of adding a dependency 
-to the selected infrastructure library in the domain layer one should: 
+Multimodule maven project allows better dependencies management because each maven module can contain only the dependencies needed by the code in this specific module. Whenever the domain module requires access to infrastructure code, e.g. to send an email or download a file from FTP instead of adding a dependency to the selected infrastructure library in the domain layer one should: 
 
 + create an interface in the domain layer simplifying the API of the infrastructure library (Facade design pattern) 
 + create a new maven module with an implementation of the interface and dependencies to the chosen libraries
 
-The Onion Architecture relies on the Dependency Inversion principle, so a way to specify that a class will be injected by the Dependency Injection framework is needed.
-One option is to use the annotations provided by the DI framework (e.g. Spring), however this will couple the domain 
-to a specific infrastructure library. In order to prevent this coupling we use the annotations from the standard dependency injection API (JSR-330) `javax.inject`.
+The Onion Architecture relies on the Dependency Inversion principle, so a way to specify that a class will be injected by the Dependency Injection framework is needed. One option is to use the annotations provided by the DI framework (e.g. Spring), however this will couple the domain to a specific infrastructure library. In order to prevent this coupling we use the annotations from the standard dependency injection API (JSR-330) `javax.inject`.
 
 # Domain layer
 
@@ -219,9 +209,7 @@ public class UserRest {
 }
 ```
 
-If you [build and run the application](#build-and-run-the-application) now 
-and send a HTTP GET to http://localhost:8080/users (`curl http://localhost:8080/users`) 
-the application will respond with an empty array.
+If you [build and run the application](#build-and-run-the-application) now and send a GET request to http://localhost:8080/users (`curl http://localhost:8080/users`) the application will respond with an empty array.
 
 # Domain and presentation layer development
 
@@ -281,8 +269,7 @@ public class User {
 ```
 
 [Lombok](https://projectlombok.org) can reduce the number of boilerplate code (such as getters, `toString()`, `equals()`, `hashCode()`).
-It is possible to [make the above class immutable what brings a lot of advantages](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html), 
-by defining an all args constructor and using [Jackon’s parameter names module](https://github.com/FasterXML/jackson-module-parameter-names).
+It is possible to [make the above class immutable what brings a lot of advantages](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html), by defining an all args constructor and using [Jackon’s parameter names module](https://github.com/FasterXML/jackson-module-parameter-names).
 
 ## Create UserRepository interface in the domain
 
@@ -370,8 +357,7 @@ public class UserRepositoryFake implements UserRepository {
 
 This class is a [fake](http://www.martinfowler.com/bliki/TestDouble.html) implementation, created to test the current solution, which will not be used in production. 
 
-If you [build and run the application](#build-and-run-the-application) now 
-and do a GET to http://localhost:8080/users (`curl http://localhost:8080/users`) the application will respond with:
+If you [build and run the application](#build-and-run-the-application) now and send a GET request to http://localhost:8080/users (`curl http://localhost:8080/users`) the application will respond with: 
 `[{"id":1,"name":"John Smith"},{"id":2,"name":"John Doe"}]`
 
 # Data layer
@@ -447,8 +433,7 @@ rm -rf onionarch-data\src\main\java\com onionarch-data\src\test\java\com
 </dependency>
 ```
 
-This is required because contrary to the traditional layered architecture the domain layer does not have a dependency to the data layer, 
-so the infrastructure has to directly provide a dependency to another infrastructure module. 
+This is required because we want the Dependency Injection container to instantiate classes from the data layer in runtime but we do not want these classes at compile time.
 
 ## Create UserDaoSpringData interface extending Spring Data's MongoRepository
 
