@@ -1,3 +1,5 @@
+package com.github.adamsiemion.onionarch;
+
 import java.util.Objects;
 
 /**

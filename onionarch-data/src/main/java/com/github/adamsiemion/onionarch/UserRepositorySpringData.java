@@ -1,3 +1,5 @@
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;

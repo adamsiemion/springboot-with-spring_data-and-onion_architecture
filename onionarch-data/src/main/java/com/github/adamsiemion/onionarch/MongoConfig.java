@@ -1,3 +1,5 @@
+package com.github.adamsiemion.onionarch;
+
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import org.springframework.context.annotation.Configuration;
