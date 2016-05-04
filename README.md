@@ -85,12 +85,12 @@ A specific version (`1.0.0-SNAPSHOT`) was provided just to follow the most popul
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-domain\src\main\java\com onionarch-domain\src\test\java\com
+rm -rf onionarch-domain\src\main\java\com\github\adamsiemion\onionarch\com onionarch-domain\src\test\java\com
 ```
 
 ## Create an empty User model class
 
-Create class `User` in `onionarch-domain\src\main\java`
+Create class `User` in `onionarch-domain\src\main\java\com\github\adamsiemion\onionarch`
 
 ```java
 public class User {
@@ -111,7 +111,7 @@ mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=o
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-rest\src\main\java\com onionarch-rest\src\test\java\com
+rm -rf onionarch-rest\src\main\java\com\github\adamsiemion\onionarch\com onionarch-rest\src\test\java\com
 ```
 
 ## Add Spring Boot Starter Web dependency
@@ -173,9 +173,11 @@ Edit pom.xml from the rest module directory and add:
 
 ## Create a `@SpringBootApplication` class
 
-Create class `Application` in `onionarch-rest\src\main\java` with the following content:
+Create class `Application` in `onionarch-rest\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -189,9 +191,11 @@ public class Application {
 
 ## Create UserRest class with the `GET /users` method
 
-Create class `UserRest` in `onionarch-rest\src\main\java` with the following content:
+Create class `UserRest` in `onionarch-rest\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -221,6 +225,8 @@ If you [build and run the application](#build-and-run-the-application) now and s
 The complete `User` source code:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import java.util.Objects;
 
 public class User {
@@ -273,9 +279,11 @@ It is possible to [make the above class immutable what brings a lot of advantage
 
 ## Create UserRepository interface in the domain
 
-Create interface `UserRepository` in `onionarch-domain\src\main\java` with the following content:
+Create interface `UserRepository` in `onionarch-domain\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 public interface UserRepository {
     Iterable<User> list();
 
@@ -289,7 +297,7 @@ public interface UserRepository {
 
 ## Inject UserRepository into UserRest
 
-Add the following content to `onionarch-rest\src\main\java\UserRest.java`:
+Add the following content to `onionarch-rest\src\main\java\com\github\adamsiemion\onionarch\UserRest.java`:
 
 ```java
 private final UserRepository userRepository;
@@ -302,7 +310,7 @@ public UserRest(final UserRepository userRepository) {
 
 ## Add CRUD methods to UserRest
 
-Add the following content to `onionarch-rest\src\main\java\UserRest.java` (overwrite the existing `list` method):
+Add the following content to `onionarch-rest\src\main\java\com\github\adamsiemion\onionarch\UserRest.java` (overwrite the existing `list` method):
 
 ```java
 @RequestMapping(method = RequestMethod.GET)
@@ -328,9 +336,11 @@ public User get(@PathVariable("id") final Long id) {
 
 ## Create a fake UserRepository implementation
 
-Create class `UserRespositoryFake` in `onionarch-domain\src\main\java` with the following content:
+Create class `UserRespositoryFake` in `onionarch-domain\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.List;
@@ -376,7 +386,7 @@ mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=o
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-data\src\main\java\com onionarch-data\src\test\java\com
+rm -rf onionarch-data\src\main\java\com\github\adamsiemion\onionarch\com onionarch-data\src\test\java\com
 ```
 
 ## Add dependencies for Spring Boot and Spring Data
@@ -412,7 +422,7 @@ rm -rf onionarch-data\src\main\java\com onionarch-data\src\test\java\com
 </dependency>
 ```
 
-## Add a dependency to fongo in the storage module
+## Add a dependency to fongo in the data module
 
 ```xml
 <dependency>
@@ -422,12 +432,12 @@ rm -rf onionarch-data\src\main\java\com onionarch-data\src\test\java\com
 </dependency>
 ```
 
-## Add a dependency to the storage module in the presentation module
+## Add a dependency to the data module in the presentation module
 
 ```xml
 <dependency>
     <groupId>com.github.adamsiemion.onionarch</groupId>
-    <artifactId>onionarch-storage</artifactId>
+    <artifactId>onionarch-data</artifactId>
     <version>${project.version}</version>
     <type>runtime</type>
 </dependency>
@@ -437,9 +447,11 @@ This is required because we want the Dependency Injection container to instantia
 
 ## Create UserDaoSpringData interface extending Spring Data's MongoRepository
 
-Create class `UserDaoMongo` in `onionarch-storage\src\main\java` with the following content:
+Create class `UserDaoMongo` in `onionarch-data\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserDaoMongo extends MongoRepository<User, String> {
@@ -448,9 +460,11 @@ public interface UserDaoMongo extends MongoRepository<User, String> {
 
 ## Create a Mongo configuration class
 
-Create class `MongoConfig` in `onionarch-storage\src\main\java` with the following content:
+Create class `MongoConfig` in `onionarch-data\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import org.springframework.context.annotation.Configuration;
@@ -472,9 +486,11 @@ public class MongoConfig extends AbstractMongoConfiguration {
 
 ## Create a UserRepository implementation, which will delegate all the calls to UserDaoSpringData
 
-Create class `UserRepositorySpringData` in `onionarch-storage\src\main\java` with the following content:
+Create class `UserRepositorySpringData` in `onionarch-data\src\main\java\com\github\adamsiemion\onionarch` with the following content:
 
 ```java
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -517,7 +533,7 @@ The above class is an example of the delegate design pattern.
 
 To build the application go to the root directory and run: `mvn install`
 
-To run the application go to the rest module directory and run: `java -jar target/onionarch-rest-1.0.0-SNAPSHOT.jar`
+To run the application go to the root directory and run: `java -jar onionarch-rest/target/onionarch-rest-1.0.0-SNAPSHOT.jar`
 
 ## Test the application
 
