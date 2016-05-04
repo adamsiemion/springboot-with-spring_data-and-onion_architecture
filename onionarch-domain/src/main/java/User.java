@@ -1,5 +1,8 @@
 import java.util.Objects;
 
+/**
+ * @author Adam Siemion
+ */
 public class User {
     private String id;
     private String name;

@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
+/**
+ * @author Adam Siemion
+ */
 @RestController
 @RequestMapping("/users")
 public class UserRest {

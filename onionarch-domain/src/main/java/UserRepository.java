@@ -1,3 +1,6 @@
+/**
+ * @author Adam Siemion
+ */
 public interface UserRepository {
     Iterable<User> list();
 
