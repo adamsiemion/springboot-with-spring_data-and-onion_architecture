@@ -1,3 +1,5 @@
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
+/**
+ * @author Adam Siemion
+ */
 @RestController
 @RequestMapping("/users")
 public class UserRest {

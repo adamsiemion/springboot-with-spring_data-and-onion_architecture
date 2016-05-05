@@ -1,5 +1,10 @@
+package com.github.adamsiemion.onionarch;
+
 import java.util.Objects;
 
+/**
+ * @author Adam Siemion
+ */
 public class User {
     private String id;
     private String name;

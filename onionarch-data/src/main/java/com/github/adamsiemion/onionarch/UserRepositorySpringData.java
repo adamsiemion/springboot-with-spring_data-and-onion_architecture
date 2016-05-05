@@ -1,7 +1,12 @@
+package com.github.adamsiemion.onionarch;
+
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 
+/**
+ * @author Adam Siemion
+ */
 @Repository
 public class UserRepositorySpringData implements UserRepository {
 

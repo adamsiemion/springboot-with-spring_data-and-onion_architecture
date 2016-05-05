@@ -1,3 +1,8 @@
+package com.github.adamsiemion.onionarch;
+
+/**
+ * @author Adam Siemion
+ */
 public interface UserRepository {
     Iterable<User> list();
 

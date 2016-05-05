@@ -27,6 +27,6 @@
   <modules>
     <module>onionarch-domain</module>
     <module>onionarch-rest</module>
-    <module>onionarch-storage</module>
+    <module>onionarch-data</module>
   </modules>
 </project>
