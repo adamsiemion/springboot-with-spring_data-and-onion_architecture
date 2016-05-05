@@ -95,7 +95,7 @@ A specific version (`1.0.0-SNAPSHOT`) was provided just to follow the most popul
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-domain\src\main\java\com onionarch-domain\src\test\java\com
+rm -rf onionarch-domain/src/main/java/com onionarch-domain/src/test/java/com
 ```
 
 ## Create an empty User model class
@@ -121,7 +121,7 @@ mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=o
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-rest\src\main\java\com onionarch-rest\src\test\java\com
+rm -rf onionarch-rest/src/main/java/com onionarch-rest/src/test/java/com
 ```
 
 ## Add Spring Boot Starter Web dependency
@@ -390,7 +390,7 @@ mvn archetype:generate -DgroupId=com.github.adamsiemion.onionarch -DartifactId=o
 ## Delete the generated Java files
 
 ```bash
-rm -rf onionarch-data\src\main\java\com onionarch-data\src\test\java\com
+rm -rf onionarch-data/src/main/java/com onionarch-data/src/test/java/com
 ```
 
 ## Add dependencies for Spring Boot and Spring Data
